@@ -1,6 +1,7 @@
 import requests
 import os
 
+from requests.exceptions import Timeout
 from bs4 import BeautifulSoup as bs
 from re import sub
 
@@ -37,7 +38,7 @@ def return_links_to_images(data):
                 req = requests.get(url).text
                 break
 
-            except:
+            except Timeout:
                 
                 print("retrying to get the data\nyou can always use Ctrl + C if you think this is not gonna work")
                 continue
@@ -92,14 +93,14 @@ def download_chapter(manga_title, chapter, chapter_images):
                 print("downloading {} - {}".format(chapter, iteration))
                 break
 
-            except:
+            except Timeout:
                 
                 print("retrying to download this chapter\nyou can always use Ctrl + C if you think this is not gonna work")
                 continue
 
         # creating the path for the future image
         image_extension = os.path.splitext(image)[-1].lower()
-        path = os.getcwd() + "\\temporal_images\\{}\\{}#{}.{}".format(manga_title, chapter, iteration, image_extension)
+        path = os.getcwd() + "\\temporal_images\\{}\\{}#{}{}".format(manga_title, chapter, iteration, image_extension)
 
         # saving the image
         with open(path, "wb") as f:

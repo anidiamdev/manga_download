@@ -11,11 +11,20 @@ def do_logic():
 def ask_for_data():
 
     manga_title = input("Title: ").lower()
+    document_type = input("Document type (docx/pdf)?: ").lower()
     
     print("Which chapters do you want to download?\nYou can input a single number or do it this way:\n5-13 (downloads from chapter 5 to 13)")
 
-    chapters = input().split("-")
-    chapters = list(map((lambda x: int(x)), chapters))  # converting list items to ints
+    while True:
+
+        try:
+            chapters = input().split("-")
+            chapters = list(map((lambda x: int(x)), chapters))  # converting list items to ints
+            break
+
+        except ValueError:
+
+            continue
 
     return({
         "manga_title": manga_title,
