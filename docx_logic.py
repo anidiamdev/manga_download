@@ -1,3 +1,4 @@
+from importlib.resources import path
 from docx import Document
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 import os
@@ -5,7 +6,8 @@ import os
 def do_docx_logic(data):
 
     document = create_docx(data)
-    add_images(data, document)
+    document = add_images(data, document)
+    save_docx(data, document)
 
     return 1
 
@@ -58,19 +60,33 @@ def add_images(data, document):
             last_paragraph = document.paragraphs[-1] 
             last_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
-    document.save(os.getcwd() + "\\test_document.docx")
+    return document
 
-    return 0
+
+def save_docx(data, document):
+
+    manga_title = data["manga_title"]
+    chapters = data["chapters"]
+
+    if not os.path.isdir("mangas"):
+
+        os.mkdir("mangas")
+
+    if not os.path.isdir("mangas\\{}".format(manga_title)):
+
+        os.mkdir("mangas\\{}".format(manga_title))
+
+    path = "{}\\mangas\\{}\\{} ({} - {}).docx".format(os.getcwd(), manga_title, manga_title, chapters[0], chapters[-1])
+
+    document.save(path)
 
 
 if __name__ == "__main__":
 
     # just some testing stuff
     doc = do_docx_logic({
-        'manga_title': 'the scholars reincarnation', 
+        'manga_title': 'shingeki no kyojin before the fall', 
         'chapters': [1],
         'document_type': 'docx'
         })
-    
-    # saves the document for testing
-    doc.save(os.getcwd() + "\\test_document.docx")
+
