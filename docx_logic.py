@@ -48,9 +48,15 @@ def add_images(data, document):
 
     for chapter_number in paths_to_downloaded_images:
 
+        paragraph = document.add_paragraph()
+        paragraph.add_run(text="chapter #{}".format(chapter_number)).bold = True
+        paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+
         for image_path in paths_to_downloaded_images[chapter_number]:
 
             document.add_picture(image_path)
+            last_paragraph = document.paragraphs[-1] 
+            last_paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
     document.save(os.getcwd() + "\\test_document.docx")
 
@@ -60,7 +66,7 @@ def add_images(data, document):
 if __name__ == "__main__":
 
     # just some testing stuff
-    doc = create_docx({
+    doc = do_docx_logic({
         'manga_title': 'the scholars reincarnation', 
         'chapters': [1],
         'document_type': 'docx'

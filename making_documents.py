@@ -1,4 +1,6 @@
 import os
+from re import sub
+
 from docx_logic import do_docx_logic
 from pdf_logic import do_pdf_logic
 
@@ -64,6 +66,7 @@ def sorting_key(e):
     """
     e = os.path.splitext(e)[0]
     e = e.split("#")[1]
+    e = sub(r"[\D.]", "", e)
 
     return int(e)
 
