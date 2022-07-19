@@ -7,13 +7,14 @@ def do_docx_logic(data):
     document = create_docx(data)
     add_images(data, document)
 
+    return 1
+
 
 def create_docx(data):
     """"
     - Creates the word document
     - Adds it a header with the manga's name, and the downloaded chapters
     """
-
     # getting the data
     manga_title = data["manga_title"]
     chapters = data["chapters"]
@@ -41,8 +42,17 @@ def create_docx(data):
 def add_images(data, document):
     """
     adds the images to the main document
+    and saves it to a provisional path
     """
     paths_to_downloaded_images = data["paths_to_downloaded_images"]
+
+    for chapter_number in paths_to_downloaded_images:
+
+        for image_path in paths_to_downloaded_images[chapter_number]:
+
+            document.add_picture(image_path)
+
+    document.save(os.getcwd() + "\\test_document.docx")
 
     return 0
 
@@ -51,8 +61,9 @@ if __name__ == "__main__":
 
     # just some testing stuff
     doc = create_docx({
-        'manga_title': 'shingeki no kyojin before the fall', 
-        'chapters': [1, 2, 3]
+        'manga_title': 'the scholars reincarnation', 
+        'chapters': [1],
+        'document_type': 'docx'
         })
     
     # saves the document for testing

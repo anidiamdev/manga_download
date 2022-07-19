@@ -11,4 +11,4 @@ if __name__ == "__main__":
     do_download_logic(data)
 
     # makes the document
-    do_document_logic(data, "docx")
+    do_document_logic(data)

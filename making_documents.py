@@ -1,16 +1,30 @@
 import os
-
+from docx_logic import do_docx_logic
+from pdf_logic import do_pdf_logic
 
 def do_document_logic(data):
 
     data["paths_to_downloaded_images"] = get_paths_to_images(data)
+    document_type = data["document_type"]
+    
+    if document_type == "docx":
+
+        do_docx_logic(data)
+
+    if document_type == "pdf":
+
+        do_pdf_logic(data)
 
     return 1
 
 
 # returns the paths to the immages 
 def get_paths_to_images(data):
-
+    """
+    returns a dictionary with the paths to the downloaded images
+    1: []
+    1 is the chapter, and the list represents the list of images
+    """
     manga_title = data["manga_title"]
     chapters = data["chapters"]
 
@@ -35,17 +49,19 @@ def get_paths_to_images(data):
 
 
 def filtering_key(e):
-
+    """
+    filters by chapter
+    """
     e = os.path.splitext(e)[0]
     e = e.split("#")[0].split(" ")[1]
-
-    print(e)
 
     return int(e)
 
 
 def sorting_key(e):
-
+    """
+    sorts by image number
+    """
     e = os.path.splitext(e)[0]
     e = e.split("#")[1]
 
@@ -56,6 +72,7 @@ if __name__ == "__main__":
 
     do_document_logic({
         'manga_title': 'the scholars reincarnation', 
-        'chapters': [1, 2]
-        }, "docx")
+        'chapters': [1],
+        'document_type': 'docx'
+        })
     
