@@ -76,6 +76,6 @@ if __name__ == "__main__":
     do_document_logic({
         'manga_title': 'shingeki no kyojin before the fall', 
         'chapters': [1],
-        'document_type': 'docx'
+        'document_type': 'pdf'
         })
     
