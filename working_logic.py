@@ -14,12 +14,6 @@ def ask_for_data():
 
     manga_title = input("Title: ").lower()
 
-    wScale = None
-
-    if match(r" -scale \d", manga_title):
-
-        wScale = manga_title.split()[-1]
-    
     while True:
 
         # just in case the user is stupid
@@ -41,8 +35,7 @@ def ask_for_data():
     return({
         "manga_title": manga_title,
         "chapters": chapters,
-        "document_type": document_type,
-        "wScale": wScale
+        "document_type": document_type
     })
 
 
