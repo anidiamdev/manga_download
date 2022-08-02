@@ -1,3 +1,5 @@
+from re import match
+
 # USES ALL THE FUNCTIONS IN THIS FILE FOR PASSING INTO THE NEXT DOWNLOADING STAGE
 def do_logic():
 
@@ -11,6 +13,12 @@ def do_logic():
 def ask_for_data():
 
     manga_title = input("Title: ").lower()
+
+    wScale = None
+
+    if match(r" -scale \d", manga_title):
+
+        wScale = manga_title.split()[-1]
     
     while True:
 
@@ -33,7 +41,8 @@ def ask_for_data():
     return({
         "manga_title": manga_title,
         "chapters": chapters,
-        "document_type": document_type
+        "document_type": document_type,
+        "wScale": wScale
     })
 
 
@@ -50,3 +59,8 @@ def return_chapters(chapters):
         
         #DOWNLOADING A SINGLE CHAPTER
         return [chapters[0]]
+
+
+if __name__ == "__main__":
+
+    print(do_logic())

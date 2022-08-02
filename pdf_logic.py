@@ -17,6 +17,8 @@ def create_pdf():
 
 def add_images(data, pdf_file):
 
+    wScale = data["wScale"] or 150
+
     pdf_file.set_font("Arial",size=50)
     pdf_file.set_text_color(0,0,0)
 
@@ -27,7 +29,9 @@ def add_images(data, pdf_file):
 
         for path in data["paths_to_downloaded_images"][key]:
 
-            pdf_file.image(path)
+            print("lol")
+
+            pdf_file.image(path, x=0, w=wScale)
     
     pdf_file.output("test_document.pdf")
 
