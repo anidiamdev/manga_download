@@ -1,4 +1,7 @@
+import os
+
 from fpdf import FPDF
+
 
 def do_pdf_logic(data):
 
@@ -20,6 +23,9 @@ def add_images(data, pdf_file):
 
     wScale = 150
 
+    manga_title = data["manga_title"]
+    chapters = data["chapters"]
+
     pdf_file.set_font("Arial",size=50)
     pdf_file.set_text_color(0,0,0)
 
@@ -33,6 +39,6 @@ def add_images(data, pdf_file):
 
             pdf_file.image(path, w=wScale)
     
-    pdf_file.output("test_document.pdf")
+    pdf_file.output("{}\\mangas\\{}\\{} ({} - {}).pdf".format(os.getcwd(), manga_title, manga_title, chapters[0], chapters[-1]))
 
     return 
