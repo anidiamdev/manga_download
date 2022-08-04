@@ -68,14 +68,6 @@ def save_docx(data, document):
     manga_title = data["manga_title"]
     chapters = data["chapters"]
 
-    if not os.path.isdir("mangas"):
-
-        os.mkdir("mangas")
-
-    if not os.path.isdir("mangas\\{}".format(manga_title)):
-
-        os.mkdir("mangas\\{}".format(manga_title))
-
     path = "{}\\mangas\\{}\\{} ({} - {}).docx".format(os.getcwd(), manga_title, manga_title, chapters[0], chapters[-1])
 
     document.save(path)

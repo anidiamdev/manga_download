@@ -6,6 +6,8 @@ from pdf_logic import do_pdf_logic
 
 def do_document_logic(data):
 
+    create_folders(data)
+
     data["paths_to_downloaded_images"] = get_paths_to_images(data)
     document_type = data["document_type"]
     
@@ -18,6 +20,19 @@ def do_document_logic(data):
         do_pdf_logic(data)
 
     return 1
+
+
+def create_folders(data):
+
+    manga_title = data["manga_title"]
+
+    if not os.path.isdir("mangas"):
+
+        os.mkdir("mangas")
+
+    if not os.path.isdir("mangas\\{}".format(manga_title)):
+
+        os.mkdir("mangas\\{}".format(manga_title))
 
 
 # returns the paths to the immages 
