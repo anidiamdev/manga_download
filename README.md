@@ -31,4 +31,4 @@ Also it makes a document with the images it downloads so you dont have to fuckin
     <li>BS4</li>              
 </ul>
 
-I hope you enjoy it when its ready, and thx for reading all this shit.
+I hope someone enjoys this, now it's ready.
