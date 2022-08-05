@@ -1,6 +1,8 @@
 from working_logic import do_logic
 from downloading import do_download_logic
 from making_documents import do_document_logic
+from delete_images import delete_images
+
 
 if __name__ == "__main__":
     
@@ -12,3 +14,6 @@ if __name__ == "__main__":
 
     # makes the document
     do_document_logic(data)
+
+    # deletes the images after making the document
+    delete_images(data)
